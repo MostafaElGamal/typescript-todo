@@ -5,11 +5,22 @@
     <title>Todo App</title>
   </head>
   <body>
-    <form id="todo_form">
-      <input type="text" name="name" id="name" placeholder="Todo Name" />
-      <input type="number" name="order" id="order" placeholder="Order" />
-      <button type="submit">submit</button>
+    <template id="todo_item">
+      <li class="todo-list__item">
+        <span class="todo-list__item-title"></span>
+        <span class="todo-list__item-order"></span>
+      </li>
+    </template>
+    <form id="todo_form" class="todo-form">
+      <input
+        class="todo-form__name"
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Todo Name"
+      />
+      <button class="todo-form__btn" type="submit">submit</button>
     </form>
-    <ul id="todo_list"></ul>
+    <ul id="todo_list" class="todo-list"></ul>
   </body>
 </html>

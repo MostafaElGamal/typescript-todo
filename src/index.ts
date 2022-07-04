@@ -58,9 +58,9 @@ class TodoForm {
       e.preventDefault();
       const form = <HTMLFormElement>e.target;
       const todoName = form.querySelector("#name") as HTMLInputElement;
-      const todoOrder = form.querySelector("#order") as HTMLInputElement;
-      if (todoName.value && todoOrder.value) {
-        appState.addTodo(todoName.value, +todoOrder.value);
+
+      if (todoName.value) {
+        appState.addTodo(todoName.value, appState.todoList.length + 1);
         form.reset();
       } else {
         alert("Please add all data");
@@ -79,10 +79,19 @@ class TodoList {
     const todoListEle = document.getElementById(AppIds.todoList);
     todoListEle.innerHTML = "";
     todos.map((todo) => {
-      const liEle = document.createElement("li") as HTMLLIElement;
-      liEle.id = todo.id.toString();
-      liEle.innerHTML = todo.name;
-      todoListEle.appendChild(liEle);
+      const liTemplate = <HTMLTemplateElement>(
+        document.getElementById("todo_item")
+      );
+
+      liTemplate.content.querySelector("li").id = todo.id.toString();
+      liTemplate.content.querySelector(".todo-list__item-title").innerHTML =
+        todo.name;
+      liTemplate.content.querySelector(".todo-list__item-order").innerHTML =
+        todo.order.toString();
+
+      const importedNode = document.importNode(liTemplate.content, true);
+
+      todoListEle.appendChild(importedNode.firstElementChild);
     });
   }
 }
